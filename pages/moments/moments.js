@@ -22,7 +22,7 @@ Page({
   },
   onLoad: function(){
     this.setData({
-      gx:['所有','供应','需求'],
+      gq:['所有','供','求'],
       nv:['人脉','合作','产品','项目','其他'],
       px:['默认排序','离我最近','费用最低','费用最高']
     })
@@ -52,6 +52,32 @@ Page({
       })
     }
     
+  },
+  list: function(e){
+    if(this.data.nzopen){
+      this.setData({
+        nzopen:false,
+        pxopen:false,
+        qyopen:false,
+        nzshow:false,
+        pxshow:true,
+        qyshow:true,
+        isfull:false,
+        shownavindex: 0
+      })
+    }else{
+      this.setData({
+        content:this.data.gq,
+        nzopen:true,
+        pxopen:false,
+        qyopen:false,
+        nzshow:false,
+        pxshow:true,
+        qyshow:true,
+        isfull:true,
+        shownavindex:e.currentTarget.dataset.nav
+      })
+    }
   },
   list: function(e){
     if(this.data.nzopen){

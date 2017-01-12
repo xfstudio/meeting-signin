@@ -4,6 +4,10 @@
             <view class="content">区域</view>
             <view class="icon"></view>
         </view>
+        <!--<view class="nav-son borders {{shownavindex == 2? 'active' : ''}}" bindtap="listgq" data-nav="1">
+            <view class="content">供求</view>
+            <view class="icon"></view>
+        </view>-->
         <view class="nav-son borders {{shownavindex == 2? 'active' : ''}}" bindtap="list" data-nav="2">
             <view class="content">类目</view>
             <view class="icon"></view>
