@@ -1,5 +1,5 @@
 //app.js
-var api_url = 'https://alifa.gg/app/index.php?i=10&c=entry&rid=73&m=meepo_bigerwall&do=';
+var apiUrl = 'https://alifa.gg/app/index.php?i=10&c=entry&rid=73&m=meepo_bigerwall&do=';
 var util = require('utils/util.js')
 App({
   onLaunch: function () {
@@ -21,9 +21,10 @@ App({
             wx.getUserInfo({
               success: function (res_user) {
                 that.globalData.userInfo = res_user.userInfo
+                that.globalData.apiUrl = res_user.apiUrl
                 typeof cb == "function" && cb(that.globalData.userInfo)
                 wx.request({
-                  url: api_url + 'qd_post',
+                  url: apiUrl + 'qd_post',
                   data: {
                     sign_words : '祝阿里健2017年会圆满成功',
                     code : res.code,

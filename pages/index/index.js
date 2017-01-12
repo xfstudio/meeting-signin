@@ -28,26 +28,37 @@ Page({
     },
     onSignin: function(e){
         if(this.data.isSignined){
-            wx.request({
-                url: createRequestUrl(), //signin interface url
-                data: {
-                    x: '',
-                    y: ''
-                },
-                header: {
-                    'content-type': 'application/json'  //application/x-www-form-urlencoded
-                },
-                success: function(res) {
-                    console.log(res.data)
-                    if(res.data.errno=='0'){
-                        wx.showModal({
-                            title:"提示",
-                            content:"参与成功，请关注活动",
-                            confirmText: "确定",
-                            cancelText: "",
-                            duration: 1500
-                        });
-                    }
+            //调用登录接口
+            wx.login({
+                success: function (res) {
+                if (res.code) {
+                    wx.getUserInfo({
+                    success: function (res_user) {
+                        wx.request({
+                        url: app.globalData.apiUrl + 'qd_post',
+                        data: {
+                            sign_words : '祝阿里健2017年会圆满成功',
+                            code : res.code,
+                            userinfo : res_user.userInfo                 
+                        },
+                        header: {
+                                'content-type': 'application/x-www-form-urlencoded'  //application/json
+                        },
+                        success: function(data) {
+                                console.log(data)
+                                if(data.openid){
+                                    wx.showToast({
+                                    title:"系统登录成功",
+                                    duration: 1500
+                                });
+                                }
+                            }
+                        })
+                    },
+                    })
+                } else {
+                    console.log('获取用户登录态失败！' + res.errMsg)
+                }
                 }
             })
             

@@ -7,9 +7,9 @@
     </view>
     <view class="signin-operate">
         <text class="btn-item btn-top" bindtap="onSignin">{{signinText}}</text>
-        <text class="btn-item" bindtap="onScan">发大屏弹幕</text>
-        <text class="btn-item" bindtap="onScan">摇一摇，有惊喜</text>
-        <text class="btn-item" bindtap="onScan">扫一扫，有惊喜</text>
+        <text class="btn-item" bindtap="onMsgSend">发射大屏弹幕</text>
+        <text class="btn-item" bindtap="onShark">摇一摇，有惊喜</text>
+        <text class="btn-item" bindtap="onScan">扫一扫</text>
     </view>
   </view>
   <loading hidden="{{isHideLoading}}" >加载中...</loading>
