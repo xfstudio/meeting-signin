@@ -7,7 +7,7 @@
     "window": {
         "backgroundTextStyle": "white",
         "navigationBarTextStyle": "white",
-        "navigationBarTitleText": "年会专用",
+        "navigationBarTitleText": "2017阿里健年会专用",
         "navigationBarBackgroundColor": "#292929",
         "backgroundColor": "#F2f2f2",
         "enablePullDownRefresh": true
@@ -28,5 +28,10 @@
             "selectedIconPath": "images/person_selected.png",
             "text": "与会人"
         }]
-    }
+    },
+    "networkTimeout": {
+        "request": 10000,
+        "downloadFile": 10000
+    },
+    "debug": true
 }

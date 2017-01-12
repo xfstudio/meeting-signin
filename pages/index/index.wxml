@@ -7,6 +7,8 @@
     </view>
     <view class="signin-operate">
         <text class="btn-item btn-top" bindtap="onSignin">{{signinText}}</text>
+        <text class="btn-item" bindtap="onScan">发大屏弹幕</text>
+        <text class="btn-item" bindtap="onScan">摇一摇，有惊喜</text>
         <text class="btn-item" bindtap="onScan">扫一扫，有惊喜</text>
     </view>
   </view>

@@ -1,6 +1,7 @@
 //index.js
 //获取应用实例
 var app = getApp();
+// var util = require('../../utils/util.js')
 Page({
     data: {
         userInfo: {},
@@ -27,13 +28,29 @@ Page({
     },
     onSignin: function(e){
         if(this.data.isSignined){
-            wx.showModal({
-                title:"提示",
-                content:"开发中...",
-                confirmText: "确定",
-                cancelText: "",
-                duration: 1500
-            });
+            wx.request({
+                url: createRequestUrl(), //signin interface url
+                data: {
+                    x: '',
+                    y: ''
+                },
+                header: {
+                    'content-type': 'application/json'  //application/x-www-form-urlencoded
+                },
+                success: function(res) {
+                    console.log(res.data)
+                    if(res.data.errno=='0'){
+                        wx.showModal({
+                            title:"提示",
+                            content:"参与成功，请关注活动",
+                            confirmText: "确定",
+                            cancelText: "",
+                            duration: 1500
+                        });
+                    }
+                }
+            })
+            
             return;
         }
         this.setData({
