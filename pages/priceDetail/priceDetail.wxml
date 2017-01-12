@@ -1,0 +1,50 @@
+<view class="page">
+   <view class="head">
+        <view class="head_sub {{(chose== 1 && navs) ? 'active' : ''}}" bindtap="hot_action">
+            <view class="head_sub_name">{{hotDefault}}</view>
+            <view class="icon"></view>
+        </view>
+        <view class="head_sub {{(chose== 2 && navs) ? 'active' : ''}}"  bindtap="price_action">
+            <view class="head_sub_name">{{priseDefault}}</view>
+            <view class="icon"></view>
+        </view>
+        <view class="head_sub {{chose== 3 ? 'active' : ''}}"  bindtap="type_action">
+            <view class="head_sub_name">{{typeDefault}}</view>
+            <view class="icon"></view>
+        </view>
+         <view class="head_sub {{chose== 4 ? 'active' : ''}}"  bindtap="chose_action">
+            <view class="head_sub_name">{{choseDefault}}</view>
+            <view class="icon"></view>
+        </view>
+   </view>
+   <view wx:if="{{chose==1}}" class="head_h {{htopen ? 'slidown' : 'slidup'}}">
+      <view wx:for="{{ht}}" wx:key="" class="detailtext {{index == hot_choseIndex ? 'chose_item' : ''}}" bindtap="hot_type" data-choseindex="{{index}}">
+          {{item}}
+          <image wx:if="{{hot_choseIndex == index}}" class="choseImg" src="../../images/chose.png"></image>
+      </view>
+   </view>
+   <view wx:if="{{chose==2}}" class="head_h {{propen ? 'slidown' : 'slidup'}}">
+      <view wx:for="{{pr}}" wx:key="" class="detailtext {{index == price_choseIndex ? 'chose_item' : ''}}" bindtap="price_type" data-choseindex="{{index}}">
+          {{item}}
+        <image wx:if="{{price_choseIndex == index}}" class="choseImg" src="../../images/chose.png"></image> 
+      </view>
+   </view>
+   <view class="fullbg {{isfull ? 'fullopacity' : ''}}" bindtap="hidebg"></view>
+   <scroll-view scroll-y="true" bindscrolltolower="loadMore" class="detail_scroll">
+        <block wx:for="{{dataList}}">
+            <view class="phone_item">
+                <view class="phone_item_left">
+                    <image src="{{item.pic}}" mode="aspectFill"></image>
+                </view>
+                <view class="phone_item_right">
+                    <view class="phone_item_title">{{item.name}}</view>
+                    <text class="item_count">周关注量{{item.thisWeekHit}}次</text>
+                    <text class="item_count right_count">¥{{item.priceShow}}</text>
+                    <view class="item_bottom">
+                        <text>{{item.reviewNum}}点评</text>
+                    </view>
+                </view>                
+            </view>
+        </block>
+   </scroll-view>
+</view>

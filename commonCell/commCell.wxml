@@ -1,0 +1,27 @@
+<template name="new_right_img">
+    <view class="item_view">
+        <view class="view_left">
+            <text class="title">{{item.stitle}}</text>
+            <view class="left_bottom">
+                <view class="time">{{item.sdate}}</view>
+            </view>
+        </view>
+        <image class="right_img" src="{{item.imgsrc}}" mode="scaleToFill"></image>
+    </view>
+</template>
+<template name="seePic">
+    <view class="pic_item">
+        <text class="title_pic">{{item.stitle}}</text>
+        <view class="pic_array">
+            <block wx:for="{{item.pics}}" wx:for-item="picA" wx:key="">
+                <image wx:if="{{index <= 2}}" src="{{picA}}" mode="aspectFill"></image>
+            </block>
+        </view>
+        <view class="bottom_pic">
+            <view class="bottom_left_pic">
+            <text>{{item.pic_num}}图  {{item.comment_num}}评论</text>
+            </view>
+            <view class="bottom_right_pic">图赏</view>
+        </view>
+    </view>
+</template>

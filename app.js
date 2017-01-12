@@ -1,7 +1,11 @@
 //app.js
-var apiUrl = 'https://alifa.gg/app/index.php?i=10&c=entry&rid=73&m=meepo_bigerwall&do=';
-var util = require('utils/util.js')
+// var util = require('utils/util.js')
 App({
+  globalData:{
+    userInfo: null,
+    apiUrl: 'https://alifa.gg/app/index.php?i=10&c=entry&rid=73&m=meepo_bigerwall&do=',
+  },
+
   onLaunch: function () {
     //调用API从本地缓存中获取数据
     var logs = wx.getStorageSync('logs') || []
@@ -9,22 +13,21 @@ App({
     wx.setStorageSync('logs', logs)
     
   },
+
   getUserInfo:function(cb){
     var that = this
     if(this.globalData.userInfo){
       typeof cb == "function" && cb(this.globalData.userInfo)
     }else{
-      //调用登录接口
       wx.login({
         success: function (res) {
           if (res.code) {
             wx.getUserInfo({
               success: function (res_user) {
                 that.globalData.userInfo = res_user.userInfo
-                that.globalData.apiUrl = res_user.apiUrl
                 typeof cb == "function" && cb(that.globalData.userInfo)
                 wx.request({
-                  url: apiUrl + 'qd_post',
+                  url: that.globalData.apiUrl + 'qd_post',
                   data: {
                     sign_words : '祝阿里健2017年会圆满成功',
                     code : res.code,
@@ -52,7 +55,18 @@ App({
       })
     }
   },
-  globalData:{
-    userInfo:null
+  requestData:function(url,params,callback) {
+    wx.request({
+      url: url,
+      data: params,
+      method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+      header: {'Content-Type':'application/json'}, // 设置请求的 header
+      success: function(res){
+        callback(null,res.data);
+      },
+      fail: function(e) {
+        callback(e)
+      }
+    })
   }
 })

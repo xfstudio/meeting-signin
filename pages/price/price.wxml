@@ -1,0 +1,47 @@
+<view class="page">
+    <scroll-view scroll-y="true" class="scroll_left">
+        <block wx:for="{{left_Data}}" wx:key="">
+            <view bindtap="left_chose" data-id="{{index}}" class="left_item {{index==0 ? 'left_item_first' : ''}} {{index == left_select_row ? 'left_item_select' : ''}}">{{item}}</view>
+        </block>
+    </scroll-view>
+    <scroll-view scroll-y="true" class="scroll_right">
+        <view wx:if="{{showHead}}">
+            <view class="section" style="margin-top: 30rpx;">排行榜</view>
+            <view class="section_head">
+                 <view class="section_head_title">排行榜</view>
+                 <image class="section_head_img" src="../../images/more.png"></image>
+            </view>
+            <view class="section" >筛选</view>
+            <navigator url="../priceDetail/priceDetail?before_id={{right_idArray[left_select_row]}}&isAll=0">
+                  <view class="section_head">
+                       <view class="section_head_title">全部</view>
+                       <image class="section_head_img" src="../../images/more.png"></image>
+                  </view>
+             </navigator>
+            <view class="section" >热门品牌</view>        
+        
+        <block wx:for="{{right_Data}}" wx:key="">
+            <navigator url="../priceDetail/priceDetail?before_id={{right_idArray[left_select_row]}}&after_id={{item.id}}&isAll=1">
+                <view class="right_item">
+                    <image class="right_item_image" src="{{item.picUrl}}" mode="scaleToFill"></image>
+                <view class="right_item_title">{{item.name}}</view>
+            </view>
+            </navigator>
+        </block>
+        <block wx:for="{{sectionTitle}}" wx:key="">
+            <view class="section abc">{{item}}</view>
+            <block wx:for="{{right_Data_abc[item]}}" wx:key="" wx:for-item="Key">
+                <view class="right_item">
+                    <image class="right_item_image" src="{{Key.picUrl}}" mode="scaleToFill"></image>
+                    <view class="right_item_title">{{Key.name}}</view>
+                 </view>
+            </block>
+        </block>
+        </view>
+         <view wx:if="{{!showHead}}">
+            <block wx:for="{{noNetData}}" wx:key="">
+                <view class="nonet">{{item}}</view>
+            </block>
+         </view>
+    </scroll-view>
+</view>

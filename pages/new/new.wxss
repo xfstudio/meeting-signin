@@ -1,0 +1,104 @@
+
+.headScroll {
+    height: 100rpx;
+    white-space: nowrap;
+}
+/*.bbigView {
+  width: 1500%;
+}*/
+.bbigScroll {
+  white-space: nowrap;
+}
+.content_page {
+  width: 100%;
+  height: 1200rpx;
+  display: inline-block;
+ 
+}
+.newHead {
+    padding: 5rpx 10rpx;
+    height: 100rpx;
+    line-height: 100rpx;
+}
+.selectState {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  color: #1070F2;
+}
+.item_view {
+  height: 170rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  overflow: hidden;
+  padding: 20rpx 20rpx;
+  background-color: #fff;
+  border-bottom: 1px solid #f7f7f7;
+}
+.view_left {
+  height: 170rpx;
+  width: 72%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.content_scroll {
+  height: 100%;
+}
+.swiper_image {
+  width: 100%;
+}
+.right_img {
+  right: 15rpx;
+  position: absolute;
+  width: 170rpx;
+  height: 130rpx;
+}
+.title {
+  height: 80%;
+  font-size: 36rpx;
+  color: #000;
+  white-space: normal;
+}
+.time {
+  font-size: 28rpx;
+  color: #ccc;
+  height: 20%;
+}
+.pic_item {
+  height: 260rpx;
+  padding: 20rpx 20rpx;
+  background-color: #fff;
+  border-bottom: 1px solid #f7f7f7;
+}
+.pic_array {
+  margin-top: 30rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;  
+  height: 145rpx;
+}
+.pic_array image{
+  width: 240rpx;
+  height: 145rpx;
+  margin-right: 20rpx;
+}
+.bottom_pic {
+  font-size: 28rpx;
+  color: #ccc;
+  height: 60rpx;
+  display: flex;
+  flex-direction: row;
+}
+.bottom_left_pic {
+  width: 90%;
+  height: 60rpx;
+  line-height: 60rpx;
+}
+.bottom_right_pic {
+  width: 10%;
+  height: 60rpx;
+  line-height: 60rpx;
+}

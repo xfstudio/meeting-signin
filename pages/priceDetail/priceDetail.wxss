@@ -1,0 +1,141 @@
+.head {
+    display: flex;
+    z-index: 99;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: #fff;
+    align-items: center;
+    height: 68rpx;
+    border: 1px solid #DCDCDC;
+    width: 100%;
+    position: fixed;
+}
+.head_sub_name {
+    display: inline-block;
+}
+.icon {
+    display: inline-block;
+    border: 4px solid transparent;
+    border-top: 4px solid #9b9b9b;
+    margin-left: 5px;
+}
+.active .head_sub_name {
+    color: #1070F2;
+}
+.active .icon {
+    border-bottom: 4px solid #1070F2;
+    border-top: 0;
+}
+
+.head_h {
+    position: relative;
+    width: 100%;
+    z-index: 3;
+    display: none;
+    max-height: 445rpx;
+    overflow-y: scroll;
+}
+.detailtext {
+    position: relative;
+    height: 75rpx;
+    border-bottom: 1px solid #DCDCDC;
+    line-height: 75rpx;
+    background-color: #fff;
+    text-indent: 48rpx;
+}
+.chose_item {
+    color: #1070F2;
+}
+.choseImg {
+    top: 22rpx;
+    right: 30rpx;
+    padding-left: 570rpx;
+    display: inline-block;
+    width: 32rpx;
+    height: 32rpx;
+}
+.fullbg {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(1, 1, 1);
+    transition: all 2s;
+    opacity: 0;
+}
+.fullopacity {
+    opacity: .5;
+}
+@keyframes slidown {
+    from {
+        transform: translateY(-445rpx);
+    }
+    to {
+        transform: translateY(75rpx);
+    }
+}
+.slidown {
+    display: block;
+    animation: slidown .7s ease-in both;
+}
+@keyframes slidup {
+    from {
+        transform: translateY(75rpx);
+    }
+    to {
+        transform: translateY(-445rpx);
+    }
+}
+.slidup {
+    display: block;
+    animation: slidup .7s ease-in both;
+}
+.detail_scroll {
+    position: fixed;
+    top: 0;
+    height: 94%;
+    margin-top: 70rpx;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+}
+.phone_item {
+    width: 100%;
+    border-bottom: 1px solid #DCDCDC;
+    background-color: #fff;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.phone_item_left {
+     width: 26%;
+}
+.phone_item_right {
+    width: 74%;
+}
+.phone_item_left image {
+    margin-left: 55rpx;
+    width: 48rpx;
+    height: 100rpx;
+}
+.phone_item_title {
+    margin-top: 15rpx;
+    line-height: 35rpx;
+}
+.item_bottom {
+    height: 55rpx;
+    line-height: 55rpx;
+    font-size: 28rpx;
+}
+.item_count {
+    margin-top: 20rpx;
+    line-height: 35rpx;
+    font-size: 28rpx;
+}
+.right_count {
+    color: red;
+    right: 30rpx;
+    position: absolute;
+}

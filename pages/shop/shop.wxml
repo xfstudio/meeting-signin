@@ -1,0 +1,29 @@
+<view class="page">
+    <swiper autoplay="true" indicator-dots="true" interval="5000" duration="1000">
+        <block wx:for="{{focusImage}}" wx:key="">
+            <swiper-item>
+                <image class="swiImage" src="{{item.picUrl}}"></image>
+            </swiper-item>
+        </block>
+    </swiper>
+    <view class="type"> 
+        <block wx:for="{{typeTitle}}" wx:key=""> 
+            <view class="type_item">
+                <image src="{{item.picUrl}}"></image>
+                <text>{{item.signName}}</text>
+            </view>
+        </block>
+    </view>
+    <block wx:for="{{floorInfo}}" wx:key="">
+        <view class="headView">
+            <image src="{{item.iconPic}}"></image>
+            <text>{{item.floorName}}</text>
+        </view>
+        <image class="hotImg" src="{{item.content[0].big.picUrl}}"></image>
+        <view class="bottoom_item">
+            <block wx:for="{{item.content[0].act}}" wx:for-item="itemPic" wx:key="">
+                <image src="{{itemPic.picUrl}}"></image>
+            </block>
+        </view>
+    </block>
+</view>

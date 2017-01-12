@@ -1,0 +1,28 @@
+<import src="../../commonCell/commCell.wxml" />
+<view class="page">
+    <scroll-view scroll-x="true" class="headScroll">
+        <block wx:for="{{newHeadList}}" wx:key="">
+            <text bindtap="headAction" data-id="{{index}}" class="newHead {{index== headSelect ? 'selectState':''}}">{{item}}</text>
+        </block>
+    </scroll-view>
+        <scroll-view  class="bbigScroll"  scroll-left="{{scroll_xvalue}}">
+        
+        <block wx:for="{{newHeadList}}" wx:key="">
+           <view class="content_page">
+                <scroll-view scroll-y="true" scroll-x="false" class="content_scroll" bindscrolltolower="loadMore">
+                    <swiper wx:if="{{index!=1}}" autoplay="true" interval="5000" duration="1000" indicator-dots="true">
+                        <block wx:for="{{pics}}" wx:for-item="picscroll" wx:key="">
+                           <swiper-item>
+                                <image class="swiper_image" src="{{picscroll.imgsrc}}"></image>
+                          </swiper-item>
+                        </block>
+                     </swiper>
+                     <navigator url="" wx:for="{{dataList}}" wx:key="">
+                          <template wx:if="{{item.type != 6}}" is="new_right_img" data="{{item}}"></template>
+                          <template wx:elif="{{item.type == 6}}" is="seePic" data="{{item}}"></template>
+                     </navigator>
+                 </scroll-view>
+             </view>
+        </block>
+   </scroll-view>
+</view>

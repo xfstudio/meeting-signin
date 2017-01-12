@@ -1,0 +1,44 @@
+<view class="page">
+    <view class="headBig">
+        <view class="headleft">
+             <block wx:for="{{headTitle}}" wx:key="">
+                 <view bindtap="headchose" data-index="{{index}}" data-right="0" class="headTitle {{index == choseIndex ? 'headselect' : ''}}" >{{item}}</view>
+             </block>
+        </view>
+        <view class="headRight" bindtap="rightAction">
+            <image  src="../../images/down.png"></image>
+        </view>
+    </view>
+    <scroll-view scroll-y="true" class="scroll" bindscrolltolower="loadMore" scroll-top="{{scrollTop}}">
+        <block wx:for="{{dataArray}}" wx:key="">
+            <view class="itemView"> 
+                <view class="item_left">
+                    <image class="headImg" src="{{item.post.userIcon}}"></image>
+                </view>
+                <view class="item_right">
+                    <text class="itemusername">{{item.post.username}}</text>
+                    <text class="itemGrade">LV.{{item.post.userGrade}}</text>
+                    <text class="itemTitle">{{item.post.title}}</text>
+                    <text class="itemContent">{{item.post.content}}</text>
+                    <view class="pic">
+                        <block wx:for="{{item.post.imageList}}" wx:key="" wx:for-item="picItem">
+                            <image wx:if="{{item.post.imageList.length == 1}}" class="onePic" src="{{picItem}}"></image>
+                            <image wx:if="{{item.post.imageList.length == 2}}" class="TwoPic" src="{{picItem}}"></image>
+                            <image wx:if="{{item.post.imageList.length == 3}}" class="threePic" src="{{picItem}}"></image>
+                            <image wx:if="{{item.post.imageList.length == 4}}" class="fourPic" src="{{picItem}}"></image>
+                            <image wx:if="{{item.post.imageList.length == 6}}" class="sixPic" src="{{picItem}}"></image>
+                            <image wx:if="{{item.post.imageList.length == 9}}" class="ninePic" src="{{picItem}}"></image>
+                        </block>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </scroll-view>
+    <view wx:if="{{isChose != ''}}" class="rightView {{rightOpen ? 'show_view' :'hide_view'}}">
+        <view class="hotBlock">热门板块</view>
+        <block wx:for="{{headTitle}}" wx:key="">
+             <view bindtap="headchose" data-index="{{index}}" data-right="1" class="rightTitle headTitle {{index == choseIndex ? 'headselect' : ''}}" >{{item}}</view>
+        </block>
+    </view>
+    <view wx:if="{{isChose == 1}}" class="fullbg {{isfull ? 'fullopacity' : ''}}" bindtap="hidebg"></view>
+</view>
