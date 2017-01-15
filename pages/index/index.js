@@ -34,7 +34,7 @@ Page({
                     wx.getUserInfo({
                     success: function (res_user) {
                         wx.request({
-                        url: app.globalData.apiUrl + 'qd_post',
+                        url: app.globalData.apiSigninUrl + 'qd_post',
                         data: {
                             sign_words : '祝阿里健2017年会圆满成功',
                             code : res.code,
