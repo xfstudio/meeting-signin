@@ -160,3 +160,35 @@
 .disappear{
     display: none;
 }
+.person-list{
+    height:100%;
+}
+.person-item{
+    display:flex;
+    border-bottom:1px solid #eee;
+    padding:20rpx;
+}
+.person-gride{
+    justify-content: center;
+    flex-direction: column;
+}
+.person-left{
+    display:relative;
+    text-align: left;
+}
+.person-left image{
+    display:inline-block;
+    height: 80rpx;
+    width:80rpx;
+    border-radius:50%;
+}
+.person-name{
+    display:inline-block;
+    color:#666;
+}
+.person-time{
+    text-align:right;
+    color:#999;
+    width:100%;
+    line-height:120rpx;
+}

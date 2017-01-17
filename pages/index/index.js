@@ -1,59 +1,69 @@
 //index.js
-//获取应用实例
 var app = getApp();
+var util = require('../../utils/util.js')
+
 Page({
     data: {
         userInfo: {},
         isHideLoading: false,
         signinText: "一键签到",
+        msgSendText: "发弹幕",
         isSignined: false,
+        isHideMsgPicker: true,
+        signinContent: null,
+        signinContents: app.globalData.signinContents
+    },
+    initData: function() {
+        var that = this
+        app.getUserInfo(function(userInfo) {
+            //更新数据
+            that.setData({
+                userInfo: userInfo,
+                isHideLoading: true,
+                isHideMsgPicker: true,
+                // signinContents: app.globalData.signinContents,
+                signinContent: that.data.signinContents[3]
+            });
+        });
     },
     onLoad: function() {
-        var that = this;
+        var that = this
         setTimeout(function() {
             that.initData();
         }, 1500);
         console.log("onLoad");
     },
-    initData: function() {
-        var that = this;
-        app.getUserInfo(function(userInfo) {
-            //更新数据
-            that.setData({
-                userInfo: userInfo,
-                isHideLoading: true
-            });
-        });
-    },
+    
     onSignin: function(e){
-        if(this.data.isSignined){
+        var that = this
+        if(that.data.isSignined){
             //调用登录接口
             wx.login({
                 success: function (res) {
                 if (res.code) {
                     wx.getUserInfo({
-                    success: function (res_user) {
-                        wx.request({
-                        url: app.globalData.apiSigninUrl + 'qd_post',
-                        data: {
-                            sign_words : '祝阿里健2017年会圆满成功',
-                            code : res.code,
-                            userinfo : res_user.userInfo                 
-                        },
-                        header: {
-                                'content-type': 'application/x-www-form-urlencoded'  //application/json
-                        },
-                        success: function(data) {
-                                console.log(data)
-                                if(data.openid){
-                                    wx.showToast({
-                                    title:"系统登录成功",
-                                    duration: 1500
-                                });
+                        success: function (res_user) {
+                            wx.request({
+                                url: that.globalData.apiSigninUrl + 'qd_post',
+                                data: {
+                                    sign_words : util.getRandomFromArray(that.data.signinContents),
+                                    code : res.code,
+                                    userinfo : res_user.userInfo                 
+                                },
+                                header: {
+                                        'content-type': 'application/x-www-form-urlencoded'  //application/json
+                                },
+                                success: function(data) {
+                                        console.log(data)
+                                        if(data.openid){
+                                            wx.showToast({
+                                            title:"签到成功",
+                                            duration: 1500
+                                        });
+                                    }
                                 }
-                            }
-                        })
-                    },
+                            })
+                        },
                     })
                 } else {
                     console.log('获取用户登录态失败！' + res.errMsg)
@@ -63,43 +73,80 @@ Page({
             
             return;
         }
-        this.setData({
+        that.setData({
             isHideLoading: false,
         });
-        var that = this;
         setTimeout(function(){
             that.setData({
                 isHideLoading: true,
-                signinText: "我要抽奖",
+                signinText: "签到成功，关注大屏幕抽奖",
                 isSignined: true
             });
             wx.showToast({
                 title:"签到成功",
                 duration: 1500
             });
-            app.signined = true;
-            console.log(app);
+            that.signined = true;
+            console.log(that);
         },500);
     },
-    onReady: function(){
-        console.log("onReady");
+    onMsgSend: function(e){
+        var that = this
+        that.setData({
+            isHideMsgPicker: false,
+            msgSendText: "选择祝福语"
+        });      
+        // wx.showToast({
+        //     title:"选择祝福语",
+        //     duration: 3000
+        // });
+    },
+    bindMsgSend: function(e){
+        var that = this
+        const val = e.detail.value
+        that.setData({
+            signinContent: that.data.signinContents[val[0]]
+        })
+        util.bgMsgSend()
+
+        wx.showToast({
+            title:"弹幕发送成功     请关注大屏幕",
+            duration: 3000
+        });
+        that.setData({
+            isHideMsgPicker: true,
+            signinText: "发弹幕"
+        });
     },
     onScan: function(e){
-        var that = this;
         wx.scanCode({
             success: function(res){
-                var result = JSON.stringify(res);
-
-                wx.showModal({
-                    title:"扫码结果",
-                    content:result,
+                var result = JSON.stringify(res)
+                util.bgSignin()
+                wx.showToast({
+                    title:"签到成功",
                     duration: 1500
                 });
+                // wx.showModal({
+                //     title:"扫码结果",
+                //     content:result,
+                //     duration: 1500
+                // });
             },
             fail: function(e){
 
             }
         })
+    },
+    
+    onShowTip: function(){
+        wx.showToast({
+            title:"点击右上角“···”执行操作",
+            duration: 5000
+        });
+    },
+    onReady: function(){
+        console.log("onReady");
     },
     onHide: function(){
         console.log("onHide");

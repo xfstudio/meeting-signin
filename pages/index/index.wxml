@@ -6,11 +6,32 @@
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </view>
     <view class="signin-operate">
-        <text class="btn-item btn-top" bindtap="onSignin">{{signinText}}</text>
-        <text class="btn-item" bindtap="onMsgSend">发射大屏弹幕</text>
-        <text class="btn-item" bindtap="onShark">摇一摇，有惊喜</text>
-        <text class="btn-item" bindtap="onScan">扫一扫</text>
+        <text class="btn-item btn-top btn-signin" bindtap="onSignin"><image src="../../images/btn_signin_normal.png"></image>{{signinText}}</text>
+        <text class="btn-item btn-msgsend" bindtap="onMsgSend">{{msgSendText}}</text>
+        <!--<text class="btn-item btn-shark" bindtap="onShark">摇一摇，有惊喜</text>-->
+        <text class="btn-item btn-scan" bindtap="onScan">扫一扫，上大屏</text>
+        <text class="btn-item  btn-showtip" bindtap="onShowTip">分享给好友</text>
+        <text class="btn-item  btn-showtip">
+          <contact-button type="default-dark" size="20" session-from="weapp">联系客服</contact-button>
+        </text>
     </view>
+    <view class="signin-operate">
+      <contact-button type="default-dark" size="20" session-from="weapp">联系客服
+      </contact-button>
+    </view>   
+    
   </view>
   <loading hidden="{{isHideLoading}}" >加载中...</loading>
+  <view class="signin" hidden="{{isHideMsgPicker}}" >
+    <view class="section_title">选择或输入祝福语</view>
+    <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" 
+      bindchange="bindMsgSend" value="{{scIndex}}" range="">
+      <picker-view-column>
+        <view wx:for="{{signinContents}}" style="line-height: 30px">{{item}}</view>
+      </picker-view-column>
+      <view class="picker">
+        发送：{{signinContent}}
+      </view>
+    </picker-view>
+  </view>
 </view>

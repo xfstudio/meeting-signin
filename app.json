@@ -1,10 +1,7 @@
 {
     "pages": [
         "pages/index/index",
-        "pages/logs/logs",
-        "pages/person/index",
-        "pages/shop/shop",
-        "pages/price/price",
+        "pages/person/person",
         "pages/mine/mine",
         "pages/moments/moments"
     ],
@@ -25,9 +22,9 @@
             "pagePath": "pages/index/index",
             "iconPath": "images/signin_normal.png",
             "selectedIconPath": "images/signin_selected.png",
-            "text": "签到"
+            "text": "会场签到"
         }, {
-            "pagePath": "pages/person/index",
+            "pagePath": "pages/person/person",
             "iconPath": "images/person_normal.png",
             "selectedIconPath": "images/person_selected.png",
             "text": "商务圈"
@@ -36,11 +33,16 @@
             "iconPath": "images/tabBarItem_pl@2x.png",
             "selectedIconPath": "images/tabBarItem_pl_selected@2x.png",
             "text": "供求悬赏"
+        }, {
+            "pagePath": "pages/mine/mine",
+            "iconPath": "images/tabBarItem_user@2x.png",
+            "selectedIconPath": "images/tabBarItem_user_selected@2x.png",
+            "text": "我"
         }]
     },
     "networkTimeout": {
         "request": 10000,
         "downloadFile": 10000
     },
-    "debug": true
+    "debug": false
 }

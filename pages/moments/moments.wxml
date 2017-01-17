@@ -45,4 +45,20 @@
         </view>
     </view>
     <view class="fullbg {{isfull ?'fullopacity':''}}" bindtap="hidebg"></view>
+
+
+    <view class="person-list">
+    <block  wx:for="{{momentsList}}" >
+    <view class="person-item" >
+        <view class="person-left person-gride">
+            <image src="{{item.avatar}}" />
+            <text class="person-name">{{item.nickname}}</text>
+        </view>
+        <text class="person-time person-gride">{{item.event_at}}</text>
+    </view>
+    </block>
+  </view>
+
+
+  <loading hidden="{{isHideLoading}}" >加载中...</loading>
 </view>

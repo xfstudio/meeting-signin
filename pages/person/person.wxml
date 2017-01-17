@@ -1,13 +1,13 @@
-<!--index.wxml-->
+<!--person.wxml-->
 <view class="container">
   <view class="person-list">
     <block  wx:for="{{signinList}}" >
     <view class="person-item" >
         <view class="person-left person-gride">
-            <image src="{{item.image}}" />
-            <text class="person-name">{{item.name}}</text>
+            <image src="{{item.avatar}}" />
+            <text class="person-name">{{item.nickname}}</text>
         </view>
-        <text class="person-time person-gride">{{item.time}}</text>
+        <text class="person-time person-gride">{{item.event_at}}</text>
     </view>
     </block>
   </view>

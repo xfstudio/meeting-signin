@@ -1,3 +1,6 @@
+//moments.js
+var app = getApp();
+var util = require('../../utils/util.js')
 var cityData = require('../../utils/city.js');
 
 // page/one/index.js
@@ -18,15 +21,59 @@ Page({
     cityright: {},
     select1: '',
     select2:'',
-    shownavindex:''
+    shownavindex:'',
+    perPage: 10,
+    curPage: 1,
+    isHideLoading: false,
+    momentsList: []
   },
   onLoad: function(){
-    this.setData({
+    var that = this;
+    that.setData({
       gq:['所有','供','求'],
       nv:['人脉','合作','产品','项目','其他'],
       px:['默认排序','离我最近','费用最低','费用最高']
     })
+    that.getMomentsList(that.data.curPage)
+    that.setData({
+        isHideLoading: true
+    });
   },
+  onShow: function(){
+        
+  },
+  getMomentsList: function(page) {
+        var that = this;
+        var list = [];
+        wx.request({
+            url: app.globalData.apiUrl + 'match/index',
+            method: 'GET',
+            data: {
+                city_id : 5101,
+                page: page,
+                per_page: that.data.perPage,
+                reward_as: 0              
+            },
+            header: {
+                'content-type': 'application/x-www-form-urlencoded',  //application/json
+                'X-Access-Token': app.globalData.access_token,
+            },
+            success: function(res) {
+                console.log(res)
+                var data = res.data
+                if(data.code == 200){                    
+                    wx.showToast({
+                        title: data.message,
+                        duration: 1500
+                    });
+                    for (var i=0;i<data.list.length;i++) data.list[i].event_at = util.date('m-d H:i:s', data.list[i].event_at)
+                    that.setData({
+                        momentsList: data.list
+                    });
+                }
+            }
+        })        
+    },
   listqy: function(e){
     if(this.data.qyopen){
       this.setData({
@@ -165,21 +212,21 @@ Page({
   onReady: function(){
         console.log("onReady");
     },
-    onHide: function(){
-        console.log("onHide");
-    },
-    onShow:function(){
-        console.log("onShow");
-    },
-    onUnload:function(){
-        console.log("onUnload");
-    },
-    onShareAppMessage: function(e){
-        wx.showToast({
-            title:"share everything",
-            duration: 1500
-        });
-        return {
-        }
-    }
+  onHide: function(){
+      console.log("onHide");
+  },
+  onShow:function(){
+      console.log("onShow");
+  },
+  onUnload:function(){
+      console.log("onUnload");
+  },
+  onShareAppMessage: function(e){
+      wx.showToast({
+          title:"share everything",
+          duration: 1500
+      });
+      return {
+      }
+  }
 })

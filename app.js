@@ -1,11 +1,11 @@
 //app.js
-var util = require('utils/util.js')
 App({
   globalData:{
     userInfo: null,
     access_token: null,
-    apiSigninUrl: 'https://alifa.gg/app/index.php?i=10&c=entry&rid=73&m=meepo_bigerwall&do=',
     apiUrl: 'https://api-test.alijian.net/index.php?r=',
+    apiSigninUrl: 'https://alifa.gg/app/index.php?i=10&c=entry&rid=73&m=meepo_bigerwall&do=',
+    signinContents: {0:'11111',1:'2222',2:'33333'}
   },
 
   onLaunch: function () {
@@ -27,11 +27,13 @@ App({
             wx.getUserInfo({
               success: function (res_user) {
                 that.globalData.userInfo = res_user.userInfo
-                typeof cb == "function" && cb(that.globalData.userInfo)              
+                typeof cb == "function" && cb(that.globalData.userInfo)
+                var data = 
                 wx.request({
                   url: that.globalData.apiUrl + 'user/wx-small-login',
                   method: 'POST',
                   data: {
+                    type: '534add',
                     code: res.code,
                     iv: res_user.iv,
                     encryptedData: res_user.encryptedData              
@@ -41,10 +43,14 @@ App({
                   },
                   success: function(user) {
                     console.log(user)
-                    if(user.access_token){
-                      that.globalData.access_token = user.access_token
-                      // that.globalData.userInfo = user.data
-                      // typeof cb == "function" && cb(that.globalData.userInfo)
+                    console.log(user.data.access_token)
+                    if(user.data.access_token == undefined){
+                      wx.showToast({
+                        title:"登录失败1",
+                        duration: 1500
+                      });                      
+                    }else{
+                      that.globalData.access_token = user.data.access_token      
                       wx.showToast({
                         title:"登录成功",
                         duration: 1500
@@ -54,11 +60,12 @@ App({
                   fail: function(e) {
                     console.log(e)                    
                     wx.showToast({
-                      title:"登录失败",
+                      title:"登录失败2",
                       duration: 1500
                     });
                   },
                 })
+                
                 wx.request({
                   url: that.globalData.apiSigninUrl + 'qd_post',
                   data: {
@@ -73,7 +80,7 @@ App({
                         console.log(data)
                         if(data.openid){
                             wx.showToast({
-                              title:"系统登录成功",
+                              title:"签到成功",
                               duration: 1500
                           });
                         }
